@@ -19,3 +19,32 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+
+---
+
+## 🧾 5. `setup.py`
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name="airpermit-ai",
+    version="0.1.0",
+    author="Ebrahim Eslami",
+    description="Generative AI tool for drafting EPA Title V / NSR air permits",
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    include_package_data=True,
+    install_requires=[
+        "pandas>=2.2",
+        "sqlalchemy>=2.0",
+        "jinja2>=3.1",
+        "sentence-transformers>=3.0",
+        "faiss-cpu>=1.8",
+        "pdfplumber>=0.11",
+        "requests>=2.32",
+        "pydantic>=2.7"
+    ],
+    python_requires=">=3.9",
+)
