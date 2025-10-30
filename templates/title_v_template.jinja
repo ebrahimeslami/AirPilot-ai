@@ -1,0 +1,56 @@
+[Agency Letterhead]
+
+DRAFT OPERATING PERMIT (TITLE V){% if nsr.permitting_path %} / {{ nsr.permitting_path }} NSR{% endif %}
+Facility: {{ facility.name }} | Permit No.: {{ title_v.permit_no or "TBD" }} | ICIS ID: {{ facility.program_ids.get("ICIS_AIR","TBD") }}
+
+1. Facility Description
+   1.1 Site & Units
+   {% for u in units -%}
+   - Unit {{ u.unit_id }}: process={{ u.process or 'TBD' }}, fuel={{ u.fuel or 'TBD' }}, controls={{ u.controls | map(attribute='type') | list }}
+   {% endfor %}
+
+   1.2 Attainment Status & Major Source Determination
+   {{ site.attainment_status or 'TBD' }}
+
+2. Applicable Requirements
+   {% for u in units -%}
+   Unit {{ u.unit_id }}:
+   {% if u.applicable_requirements -%}
+   {% for ar in u.applicable_requirements -%}
+   - {{ ar.citation }} ({{ ar.basis }})
+   {% endfor -%}
+   {% else -%}
+   - [placeholder] Evaluate NSPS/MACT/SIP triggers for this unit.
+   {% endif -%}
+   {% endfor %}
+
+3. Emission Limits & Standards
+   {% for u in units -%}
+   Unit {{ u.unit_id }}:
+   {% if u.emission_limits -%}
+   {% for lim in u.emission_limits -%}
+   - {{ lim.pollutant }}: {{ lim.value }} {{ lim.form }}{% if lim.basis %} ({{ lim.basis }}){% endif %} [source: {{ lim.source_span or 'TBD' }}]
+   {% endfor -%}
+   {% else -%}
+   - [placeholder] Add BACT/LAER or SIP limits as applicable.
+   {% endif -%}
+   {% endfor %}
+
+4. Monitoring / Testing / Recordkeeping / Reporting (MRR)
+   {% for u in units -%}
+   Unit {{ u.unit_id }}:
+   - Monitoring: {% if u.monitoring %}{% for m in u.monitoring %}{{ m.method }}{% if m.pollutant %} ({{ m.pollutant }}){% endif %}{% if not loop.last %}; {% endif %}{% endfor %}{% else %}[placeholder] Determine CEMS/Parametric monitoring.{% endif %}
+   - Testing: {% if u.testing %}{% for t in u.testing %}{{ t.method }}{% if t.frequency %} ({{ t.frequency }}){% endif %}{% if not loop.last %}; {% endif %}{% endfor %}{% else %}[placeholder] Initial performance test and periodic verification.{% endif %}
+   - Recordkeeping/Reporting: {% if u.rr %}{{ u.rr | join('; ') }}{% else %}[placeholder] Semiannual deviation and annual certification per 40 CFR 70.6.{% endif %}
+   {% endfor %}
+
+5. Compliance Assurance & Schedule
+   - [placeholder] Initial test dates based on construction/modify dates.
+   - [placeholder] PSD/NNSR modeling summary & increment check if applicable.
+   - [placeholder] Public notice: 30-day comment; EPA 45-day review (state overlays may apply).
+
+6. Insignificant Activities & General Conditions
+   - {{ title_v.insignificant_activities or '[placeholder]' }}
+   - General conditions: duty to comply; duty to provide information; reopeners; severability; emergency provisions.
+
+Appendices: PTE calculations; Modeling; BACT/LAER; Test Reports (links); Prior Permits; Sources.
