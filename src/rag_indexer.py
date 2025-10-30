@@ -60,12 +60,15 @@ def build_index_for_folder(folder: Path, index_name: str):
                 continue
             chunks = chunk_text(raw, max_len=1100)
             for i, ch in enumerate(chunks):
-                texts.append(ch["text"])
+                segment = ch["text"]
+                texts.append(segment)
                 metas.append({
                     "path": str(p),
                     "chunk": i,
                     "citations": ch.get("citations", []),
+                    "text": segment[:800]  # keep a succinct excerpt in meta for inline quoting
                 })
+
         except Exception as e:
             print(f"⚠️ Skipped {p}: {e}")
 
