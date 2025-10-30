@@ -1,0 +1,26 @@
+{
+  "title": 40,
+  "description": "Placeholder structure for eCFR Title 40 (environmental protection).",
+  "sections": [
+    {
+      "part": "50",
+      "title": "National Primary and Secondary Ambient Air Quality Standards"
+    },
+    {
+      "part": "60",
+      "title": "Standards of Performance for New Stationary Sources"
+    },
+    {
+      "part": "63",
+      "title": "National Emission Standards for Hazardous Air Pollutants"
+    },
+    {
+      "part": "70",
+      "title": "State Operating Permit Programs"
+    },
+    {
+      "part": "71",
+      "title": "Federal Operating Permit Programs"
+    }
+  ]
+}
