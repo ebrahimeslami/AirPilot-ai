@@ -57,7 +57,7 @@ airpermit-ai/
 
 ### ⚙️ Installation
 ```bash
-git clone https://github.com/<your-username>/airpermit-ai.git
+git clone https://github.com/<your-username>/AirPilot-ai.git
 cd airpermit-ai
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
